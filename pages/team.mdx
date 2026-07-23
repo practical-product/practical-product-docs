@@ -1,23 +1,20 @@
-import { Cards, Card } from 'nextra/components'
-
 # 팀
 
-<Cards>
-  <Card
-    title="ctsiwonnim"
-    href="https://github.com/ctsiwonnim"
-    icon={<span>🧑‍💻</span>}
-  >
-    회원 · 인증 · 인프라/배포 파트
-  </Card>
-  <Card
-    title="ghktndyd"
-    href="https://github.com/ghktndyd"
-    icon={<span>🧑‍💻</span>}
-  >
-    주문 · 결제 · 관측성 파트
-  </Card>
-</Cards>
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem', marginTop: '1.5rem' }}>
+
+  <a href="https://github.com/ctsiwonnim" style={{ display: 'block', padding: '1.25rem', border: '1px solid #e5e5e5', borderRadius: '12px', textDecoration: 'none' }}>
+    <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>🧑‍💻</div>
+    <div style={{ fontWeight: 700, marginBottom: '0.25rem' }}>ctsiwonnim</div>
+    <div style={{ fontSize: '0.9rem', opacity: 0.7 }}>회원 · 인증 · 인프라/배포 파트</div>
+  </a>
+
+  <a href="https://github.com/ghktndyd" style={{ display: 'block', padding: '1.25rem', border: '1px solid #e5e5e5', borderRadius: '12px', textDecoration: 'none' }}>
+    <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>🧑‍💻</div>
+    <div style={{ fontWeight: 700, marginBottom: '0.25rem' }}>ghktndyd</div>
+    <div style={{ fontSize: '0.9rem', opacity: 0.7 }}>주문 · 결제 · 관측성 파트</div>
+  </a>
+
+</div>
 
 > 위 역할 구분은 커밋 이력 기준으로 추정한 것입니다. 실제 이름, 직군,
 > 한 줄 소개, 담당 파트로 수정해주세요.
