@@ -14,10 +14,60 @@ h1, h2, h3 {
   font-weight: 800;
 }
 
+h1 {
+  font-size: 2.25rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+h2 {
+  margin-top: 2.5rem !important;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
 .nextra-nav-container {
   backdrop-filter: blur(10px);
 }
 
 a {
   text-underline-offset: 3px;
+}
+
+/* 코드블록: 폭 넓히고 그림자 살짝 */
+pre {
+  border-radius: 12px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  font-size: 0.85rem !important;
+  line-height: 1.6 !important;
+}
+
+/* 인라인 코드 강조 */
+:not(pre) > code {
+  background: rgba(122, 31, 61, 0.08) !important;
+  color: var(--practical-accent) !important;
+  border-radius: 4px !important;
+  padding: 0.15em 0.4em !important;
+  font-weight: 600;
+}
+
+/* 리스트 간격 */
+ul > li, ol > li {
+  margin-top: 0.4rem !important;
+}
+
+/* blockquote 포인트 컬러 */
+blockquote {
+  border-left: 3px solid var(--practical-accent) !important;
+  background: rgba(122, 31, 61, 0.04);
+  border-radius: 0 8px 8px 0;
+  padding: 0.75rem 1rem !important;
+}
+
+/* 카드형 링크(팀 페이지 등) 호버 효과 */
+a[href^="https://github.com/"] {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+a[href^="https://github.com/"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
