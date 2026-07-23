@@ -1,0 +1,7 @@
+export default {
+  index: '홈',
+  introduction: '프로젝트 소개',
+  architecture: '아키텍처',
+  'tech-stack': '기술 스택',
+  team: '팀'
+}
