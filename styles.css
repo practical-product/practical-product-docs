@@ -1,0 +1,23 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+:root {
+  --practical-accent: #7a1f3d;
+}
+
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+h1, h2, h3 {
+  letter-spacing: -0.03em;
+  font-weight: 800;
+}
+
+.nextra-nav-container {
+  backdrop-filter: blur(10px);
+}
+
+a {
+  text-underline-offset: 3px;
+}
