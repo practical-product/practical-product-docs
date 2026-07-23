@@ -1,0 +1,58 @@
+# 백엔드 아키텍처
+
+Spring Boot 기반 **모듈러 모놀리식(Modular Monolith)** 구조입니다.
+Gradle 멀티모듈로 도메인을 물리적으로 분리하되, 배포는 단일 애플리케이션으로
+운영해 마이크로서비스의 복잡도 없이 도메인 응집도를 확보했습니다.
+
+## 모듈 구성
+modules/
+├─ member (member-api / member-core)
+├─ category (category-api / category-core)
+├─ product
+├─ order (order-api / order-core)
+└─ payment (payment-api / payment-core)
+
+- `-api` 모듈: 다른 도메인에 노출하는 Facade, 이벤트만 포함
+- `-core` 모듈: `internal` 패키지 아래 실제 구현을 은닉
+
+예를 들어 `member-api`는 `AuthFacade`, `MemberFacade`만 외부에 노출하고,
+실제 로직은 `member-core`의 internal 패키지에 감춰져 있어
+다른 모듈이 구현 세부사항에 의존할 수 없습니다.
+
+## 인증
+
+- httpOnly 쿠키 기반 JWT 인증
+- 리프레시 토큰 **서버 측 무효화** — 로테이션 + 재사용 탐지
+  (탈취된 토큰이 재사용되면 즉시 세션 무효화)
+- 리프레시 토큰 소비 시 비관적 락으로 동시 요청 경합 차단
+- 인증 관련 CSRF 방어, 쿠키 secure 옵션 fail-safe 기본값 적용
+
+## 재고 · 주문
+
+- 상품 옵션(SKU) 단위로 재고를 관리
+- 주문 생성 시 **재고 예약(원자적 차감)** 으로 전환해 동시 주문 시
+  초과 판매를 방지
+- 여러 상품을 한 번에 주문할 때는 재고 예약 락 순서를 정렬해 데드락 예방
+- 만료된 재고 예약은 스케줄러가 자동 해제
+
+## 결제
+
+- **토스페이먼츠(Toss Payments)** 결제 승인 연동
+- 결제 승인 시 동시 경합으로 인한 UNIQUE 제약 위반은 **멱등 성공**으로 처리
+- 가상계좌 입금 완료 웹훅 수신 → **Outbox 패턴**으로 이벤트 발행
+  (웹훅 유실이나 순서 역전에도 안전하게 처리)
+- 토스 응답의 가상계좌 secret은 최상위 필드에서 파싱 (연동 시 흔한 실수 지점)
+- 결제 취소 시 자동 구매확정과의 경합으로 인한 "환불 후 실패" 케이스 방지
+
+## 관측성 (Observability)
+
+- Prometheus + Grafana로 비즈니스/RED(Rate·Error·Duration) 대시보드 구성
+- Loki(로그) + Tempo(분산 트레이싱)
+- 요청 상관관계 ID(Correlation ID) 필터 — 로그 위조 방지를 위한 헤더 검증 포함
+- 결제 실패율 등 주요 지표는 Discord로 알림
+
+## 배포
+
+- Docker 이미지 빌드 → Docker Hub 푸시 → EC2 배포
+- GitHub Actions 기반 CI/CD, `deploy` 브랜치로 배포 트리거 관리
+- 코드 리뷰 봇이 PR마다 빌드/테스트 자동 실행
