@@ -71,8 +71,9 @@ export default function Mermaid({ chart }) {
             svgEl.style.maxWidth = 'none'
             svgEl.style.width = '100%'
             svgEl.style.height = '100%'
-            svgEl.querySelectorAll('.er.entityLabel, text.er.entityLabel').forEach((t) => {
+            svgEl.querySelectorAll('[class*="entityLabel"]').forEach((t) => {
               t.style.fontWeight = '700'
+              t.style.fontSize = '15px'
             })
             panZoomInstance = svgPanZoom(svgEl, {
               zoomEnabled: true,
