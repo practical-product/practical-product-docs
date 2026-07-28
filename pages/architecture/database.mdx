@@ -29,101 +29,101 @@ erDiagram
   "PRODUCT_SKU (SKU)" ||--o{ "STOCK_RESERVATION (재고 예약)" : "예약된다"
 
   "CATEGORY (카테고리)" {
-    bigint "카테고리ID(id)" PK
-    varchar "카테고리코드(code)" UK
-    varchar "카테고리명(name)"
-    bigint "부모카테고리ID(parent_id)"
-    boolean "노출여부(is_displayed)"
+    bigint id PK "카테고리 ID"
+    varchar code UK "카테고리 코드"
+    varchar name "카테고리명"
+    bigint parent_id "부모 카테고리 ID"
+    boolean is_displayed "노출 여부"
   }
   "PRODUCT (상품)" {
-    bigint "상품ID(id)" PK
-    varchar "상품코드(code)" UK
-    bigint "카테고리ID(category_id)"
-    varchar "상품명(name)"
-    varchar "상품설명(description)"
-    bigint "가격(price)"
-    varchar "상품상태(status)"
-    boolean "삭제여부(is_deleted)"
+    bigint id PK "상품 ID"
+    varchar code UK "상품 코드"
+    bigint category_id "카테고리 ID"
+    varchar name "상품명"
+    varchar description "상품 설명"
+    bigint price "가격"
+    varchar status "상품 상태"
+    boolean is_deleted "삭제 여부"
   }
   "PRODUCT_OPTION_GROUP (옵션 그룹)" {
-    bigint "옵션그룹ID(id)" PK
-    bigint "상품ID(product_id)"
-    varchar "그룹명(name)"
-    int "표시순서(display_order)"
+    bigint id PK "옵션그룹 ID"
+    bigint product_id "상품 ID"
+    varchar name "그룹명"
+    int display_order "표시 순서"
   }
   "PRODUCT_OPTION (옵션)" {
-    bigint "옵션ID(id)" PK
-    bigint "옵션그룹ID(option_group_id)"
-    varchar "옵션명(name)"
-    bigint "추가금(additional_price)"
+    bigint id PK "옵션 ID"
+    bigint option_group_id "옵션그룹 ID"
+    varchar name "옵션명"
+    bigint additional_price "추가금"
   }
   "PRODUCT_SKU (SKU)" {
-    bigint "SKU_ID(id)" PK
-    bigint "상품ID(product_id)"
-    varchar "SKU코드(code)" UK
-    varchar "옵션조합명(option_name)"
-    bigint "판매가(price)"
+    bigint id PK "SKU ID"
+    bigint product_id "상품 ID"
+    varchar code UK "SKU 코드"
+    varchar option_name "옵션조합명"
+    bigint price "판매가"
   }
   "PRODUCT_STOCK (재고)" {
-    bigint "재고ID(id)" PK
-    bigint "SKU_ID(sku_id)" UK
-    int "재고수량(quantity)"
+    bigint id PK "재고 ID"
+    bigint sku_id UK "SKU ID"
+    int quantity "재고수량"
   }
   "PRODUCT_IMAGE (이미지)" {
-    bigint "이미지ID(id)" PK
-    bigint "상품ID(product_id)"
-    varchar "이미지URL(image_url)"
-    int "정렬순서(sort_order)"
+    bigint id PK "이미지 ID"
+    bigint product_id "상품 ID"
+    varchar image_url "이미지 URL"
+    int sort_order "정렬순서"
   }
   "MEMBER (회원)" {
-    bigint "회원ID(id)" PK
-    varchar "이메일(email)" UK
-    varchar "이름(name)"
-    varchar "닉네임(nickname)"
-    varchar "회원상태(status)"
+    bigint id PK "회원 ID"
+    varchar email UK "이메일"
+    varchar name "이름"
+    varchar nickname "닉네임"
+    varchar status "회원상태"
   }
   "ORDERS (주문)" {
-    bigint "주문ID(id)" PK
-    varchar "주문번호(order_no)" UK
-    bigint "회원ID(member_id)"
-    varchar "주문상태(status)"
-    bigint "총액(total_price)"
-    datetime "결제완료일시(paid_at)"
+    bigint id PK "주문 ID"
+    varchar order_no UK "주문번호"
+    bigint member_id "회원 ID"
+    varchar status "주문상태"
+    bigint total_price "총액"
+    datetime paid_at "결제완료일시"
   }
   "ORDER_ITEM (주문 아이템)" {
-    bigint "주문아이템ID(id)" PK
-    bigint "주문ID(order_id)"
-    bigint "상품ID(product_id)"
-    bigint "SKU_ID(sku_id)"
-    int "수량(quantity)"
+    bigint id PK "주문아이템 ID"
+    bigint order_id "주문 ID"
+    bigint product_id "상품 ID"
+    bigint sku_id "SKU ID"
+    int quantity "수량"
   }
   "PAYMENT (결제)" {
-    bigint "결제ID(id)" PK
-    bigint "주문ID(order_id)" UK
-    varchar "결제키(payment_key)" UK
-    bigint "결제금액(amount)"
-    varchar "결제상태(status)"
+    bigint id PK "결제 ID"
+    bigint order_id UK "주문 ID"
+    varchar payment_key UK "결제키"
+    bigint amount "결제금액"
+    varchar status "결제상태"
   }
   "STOCK_RESERVATION (재고 예약)" {
-    bigint "예약ID(id)" PK
-    bigint "SKU_ID(sku_id)"
-    bigint "주문ID(order_id)"
-    int "예약수량(quantity)"
-    varchar "예약상태(status)"
-    datetime "만료시각(expires_at)"
+    bigint id PK "예약 ID"
+    bigint sku_id "SKU ID"
+    bigint order_id "주문 ID"
+    int quantity "예약수량"
+    varchar status "예약상태"
+    datetime expires_at "만료시각"
   }
   "OUTBOX_EVENT (아웃박스 이벤트)" {
-    bigint "이벤트ID(id)" PK
-    varchar "이벤트타입(event_type)"
-    json "페이로드(payload)"
-    varchar "발행상태(status)"
+    bigint id PK "이벤트 ID"
+    varchar event_type "이벤트타입"
+    json payload "페이로드"
+    varchar status "발행상태"
   }
   "REFRESH_TOKEN (리프레시 토큰)" {
-    bigint "토큰ID(id)" PK
-    bigint "회원ID(member_id)"
-    varchar "토큰체인ID(token_family)"
-    varchar "토큰식별자(jti)" UK
-    varchar "토큰상태(status)"
+    bigint id PK "토큰 ID"
+    bigint member_id "회원 ID"
+    varchar token_family "토큰체인ID"
+    varchar jti UK "토큰식별자"
+    varchar status "토큰상태"
   }
 `} />
 
