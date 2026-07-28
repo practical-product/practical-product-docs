@@ -104,14 +104,38 @@ export default function Mermaid({ chart }) {
   return (
     <div>
       <style>{`
-        .mermaid-erd-wrap .er.entityLabel {
-          font-weight: 700 !important;
-        }
         .mermaid-erd-wrap text {
           font-family: 'Pretendard', -apple-system, sans-serif !important;
         }
         .mermaid-erd-wrap svg {
           cursor: grab;
+        }
+        /* 테이블 제목 행 강조 */
+        .mermaid-erd-wrap .er.entityBox {
+          fill: #7a1f3d !important;
+        }
+        .mermaid-erd-wrap .er.entityLabel {
+          font-weight: 700 !important;
+          font-size: 16px !important;
+          fill: #ffffff !important;
+        }
+        /* 속성 행 텍스트 */
+        .mermaid-erd-wrap .er.attributeBoxOdd,
+        .mermaid-erd-wrap .er.attributeBoxEven {
+          stroke: #e5d5da !important;
+        }
+        .mermaid-erd-wrap [id*="entity"] text {
+          font-size: 14px !important;
+        }
+        /* 관계선 라벨 배경으로 가독성 확보 */
+        .mermaid-erd-wrap .relationshipLabelBox {
+          fill: #ffffff !important;
+          fill-opacity: 0.9 !important;
+        }
+        .mermaid-erd-wrap .relationshipLabel {
+          font-size: 12px !important;
+          fill: #7a1f3d !important;
+          font-weight: 600 !important;
         }
       `}</style>
       <div
