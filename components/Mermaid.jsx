@@ -42,20 +42,20 @@ export default function Mermaid({ chart }) {
     const id = `mermaid-diagram-${idCounter}`
 
     loadMermaid()
-  .then((mermaid) => {
-    const normalized = chart
-      .trim()
-      .replace(/^erDiagram\s*/, 'erDiagram\n')
-    return mermaid.render(id, normalized)
-  })
-  .then(({ svg }) => {
-    if (!cancelled && ref.current) {
-      ref.current.innerHTML = svg
-    }
-  })
-  .catch((err) => {
-    if (!cancelled) setError(err.message)
-  })
+      .then((mermaid) => {
+        const normalized = chart
+          .trim()
+          .replace(/^erDiagram\s*/, 'erDiagram\n')
+        return mermaid.render(id, normalized)
+      })
+      .then(({ svg }) => {
+        if (!cancelled && ref.current) {
+          ref.current.innerHTML = svg
+        }
+      })
+      .catch((err) => {
+        if (!cancelled) setError(err.message)
+      })
 
     return () => {
       cancelled = true
