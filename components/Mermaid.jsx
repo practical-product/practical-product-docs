@@ -6,7 +6,24 @@ function loadMermaid() {
   if (!mermaidPromise) {
     mermaidPromise = import('mermaid').then((mod) => {
       const mermaid = mod.default
-      mermaid.initialize({ startOnLoad: false, theme: 'neutral' })
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: 'base',
+        fontFamily: 'Pretendard, -apple-system, sans-serif',
+        themeVariables: {
+          primaryColor: '#f5e9ec',
+          primaryTextColor: '#3d0f1d',
+          primaryBorderColor: '#7a1f3d',
+          lineColor: '#a6798a',
+          secondaryColor: '#faf3f5',
+          tertiaryColor: '#ffffff',
+          attributeBackgroundColorOdd: '#ffffff',
+          attributeBackgroundColorEven: '#faf3f5',
+          entityBorder: '#7a1f3d',
+          nodeBorder: '#7a1f3d',
+          fontSize: '14px'
+        }
+      })
       return mermaid
     })
   }
