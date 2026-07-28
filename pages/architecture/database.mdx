@@ -29,101 +29,101 @@ erDiagram
   "PRODUCT_SKU (SKU)" ||--o{ "STOCK_RESERVATION (재고 예약)" : "예약된다"
 
   "CATEGORY (카테고리)" {
-    string "카테고리ID" "id (bigint)" PK
-    string "카테고리코드" "code (varchar)" UK
-    string "카테고리명" "name (varchar)"
-    string "부모카테고리ID" "parent_id (bigint)"
-    string "노출여부" "is_displayed (boolean)"
+    bigint "카테고리ID(id)" PK
+    varchar "카테고리코드(code)" UK
+    varchar "카테고리명(name)"
+    bigint "부모카테고리ID(parent_id)"
+    boolean "노출여부(is_displayed)"
   }
   "PRODUCT (상품)" {
-    string "상품ID" "id (bigint)" PK
-    string "상품코드" "code (varchar)" UK
-    string "카테고리ID" "category_id (bigint)"
-    string "상품명" "name (varchar)"
-    string "상품설명" "description (varchar)"
-    string "가격" "price (bigint)"
-    string "상품상태" "status (varchar)"
-    string "삭제여부" "is_deleted (boolean)"
+    bigint "상품ID(id)" PK
+    varchar "상품코드(code)" UK
+    bigint "카테고리ID(category_id)"
+    varchar "상품명(name)"
+    varchar "상품설명(description)"
+    bigint "가격(price)"
+    varchar "상품상태(status)"
+    boolean "삭제여부(is_deleted)"
   }
   "PRODUCT_OPTION_GROUP (옵션 그룹)" {
-    string "옵션그룹ID" "id (bigint)" PK
-    string "상품ID" "product_id (bigint)"
-    string "그룹명" "name (varchar)"
-    string "표시순서" "display_order (int)"
+    bigint "옵션그룹ID(id)" PK
+    bigint "상품ID(product_id)"
+    varchar "그룹명(name)"
+    int "표시순서(display_order)"
   }
   "PRODUCT_OPTION (옵션)" {
-    string "옵션ID" "id (bigint)" PK
-    string "옵션그룹ID" "option_group_id (bigint)"
-    string "옵션명" "name (varchar)"
-    string "추가금" "additional_price (bigint)"
+    bigint "옵션ID(id)" PK
+    bigint "옵션그룹ID(option_group_id)"
+    varchar "옵션명(name)"
+    bigint "추가금(additional_price)"
   }
   "PRODUCT_SKU (SKU)" {
-    string "SKU ID" "id (bigint)" PK
-    string "상품ID" "product_id (bigint)"
-    string "SKU코드" "code (varchar)" UK
-    string "옵션조합명" "option_name (varchar)"
-    string "판매가" "price (bigint)"
+    bigint "SKU_ID(id)" PK
+    bigint "상품ID(product_id)"
+    varchar "SKU코드(code)" UK
+    varchar "옵션조합명(option_name)"
+    bigint "판매가(price)"
   }
   "PRODUCT_STOCK (재고)" {
-    string "재고ID" "id (bigint)" PK
-    string "SKU ID" "sku_id (bigint)" UK
-    string "재고수량" "quantity (int)"
+    bigint "재고ID(id)" PK
+    bigint "SKU_ID(sku_id)" UK
+    int "재고수량(quantity)"
   }
   "PRODUCT_IMAGE (이미지)" {
-    string "이미지ID" "id (bigint)" PK
-    string "상품ID" "product_id (bigint)"
-    string "이미지URL" "image_url (varchar)"
-    string "정렬순서" "sort_order (int)"
+    bigint "이미지ID(id)" PK
+    bigint "상품ID(product_id)"
+    varchar "이미지URL(image_url)"
+    int "정렬순서(sort_order)"
   }
   "MEMBER (회원)" {
-    string "회원ID" "id (bigint)" PK
-    string "이메일" "email (varchar)" UK
-    string "이름" "name (varchar)"
-    string "닉네임" "nickname (varchar)"
-    string "회원상태" "status (varchar)"
+    bigint "회원ID(id)" PK
+    varchar "이메일(email)" UK
+    varchar "이름(name)"
+    varchar "닉네임(nickname)"
+    varchar "회원상태(status)"
   }
   "ORDERS (주문)" {
-    string "주문ID" "id (bigint)" PK
-    string "주문번호" "order_no (varchar)" UK
-    string "회원ID" "member_id (bigint)"
-    string "주문상태" "status (varchar)"
-    string "총액" "total_price (bigint)"
-    string "결제완료일시" "paid_at (datetime)"
+    bigint "주문ID(id)" PK
+    varchar "주문번호(order_no)" UK
+    bigint "회원ID(member_id)"
+    varchar "주문상태(status)"
+    bigint "총액(total_price)"
+    datetime "결제완료일시(paid_at)"
   }
   "ORDER_ITEM (주문 아이템)" {
-    string "주문아이템ID" "id (bigint)" PK
-    string "주문ID" "order_id (bigint)"
-    string "상품ID" "product_id (bigint)"
-    string "SKU ID" "sku_id (bigint)"
-    string "수량" "quantity (int)"
+    bigint "주문아이템ID(id)" PK
+    bigint "주문ID(order_id)"
+    bigint "상품ID(product_id)"
+    bigint "SKU_ID(sku_id)"
+    int "수량(quantity)"
   }
   "PAYMENT (결제)" {
-    string "결제ID" "id (bigint)" PK
-    string "주문ID" "order_id (bigint)" UK
-    string "결제키" "payment_key (varchar)" UK
-    string "결제금액" "amount (bigint)"
-    string "결제상태" "status (varchar)"
+    bigint "결제ID(id)" PK
+    bigint "주문ID(order_id)" UK
+    varchar "결제키(payment_key)" UK
+    bigint "결제금액(amount)"
+    varchar "결제상태(status)"
   }
   "STOCK_RESERVATION (재고 예약)" {
-    string "예약ID" "id (bigint)" PK
-    string "SKU ID" "sku_id (bigint)"
-    string "주문ID" "order_id (bigint)"
-    string "예약수량" "quantity (int)"
-    string "예약상태" "status (varchar)"
-    string "만료시각" "expires_at (datetime)"
+    bigint "예약ID(id)" PK
+    bigint "SKU_ID(sku_id)"
+    bigint "주문ID(order_id)"
+    int "예약수량(quantity)"
+    varchar "예약상태(status)"
+    datetime "만료시각(expires_at)"
   }
   "OUTBOX_EVENT (아웃박스 이벤트)" {
-    string "이벤트ID" "id (bigint)" PK
-    string "이벤트타입" "event_type (varchar)"
-    string "페이로드" "payload (json)"
-    string "발행상태" "status (varchar)"
+    bigint "이벤트ID(id)" PK
+    varchar "이벤트타입(event_type)"
+    json "페이로드(payload)"
+    varchar "발행상태(status)"
   }
   "REFRESH_TOKEN (리프레시 토큰)" {
-    string "토큰ID" "id (bigint)" PK
-    string "회원ID" "member_id (bigint)"
-    string "토큰체인ID" "token_family (varchar)"
-    string "토큰식별자" "jti (varchar)" UK
-    string "토큰상태" "status (varchar)"
+    bigint "토큰ID(id)" PK
+    bigint "회원ID(member_id)"
+    varchar "토큰체인ID(token_family)"
+    varchar "토큰식별자(jti)" UK
+    varchar "토큰상태(status)"
   }
 `} />
 
